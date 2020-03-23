@@ -94,25 +94,25 @@ yo jhipster-imageblobindexation
 ### Photo entity add to navbar
 
 <div align="center">
-    <img src="https://gitlab.com/maximelordey/jhipster-module-imageblob_indexation/raw/master/images/navbar-photo-entity.png">
+    <img src="https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/tree/master/images/navbar-photo-entity.png">
 </div>
 
 ### Global view of photo entities with cache
 
 <div align="center">
-    <img src="https://gitlab.com/maximelordey/jhipster-module-imageblob_indexation/raw/master/images/global-view-photo-entity.png">
+    <img src="https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/tree/master/images/global-view-photo-entity.png">
 </div>
 
 ### Form to edit and save entity
 
 <div align="center">
-    <img src="https://gitlab.com/maximelordey/jhipster-module-imageblob_indexation/raw/master/images/save-photo-entity.png">
+    <img src="https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/tree/master/images/save-photo-entity.png">
 </div>
 
 ### Indexation with elasticsearch
 
 <div align="center">
-    <img src="https://gitlab.com/maximelordey/jhipster-module-imageblob_indexation/raw/master/images/elasticsearch-photo-entity.png">
+    <img src="https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/tree/master/images/elasticsearch-photo-entity.png">
 </div>
 
 ## Examples
@@ -120,14 +120,14 @@ yo jhipster-imageblobindexation
 ### Example with Text as image
 
 <div align="center">
-    <img src="https://gitlab.com/maximelordey/jhipster-module-imageblob_indexation/raw/master/images/example1-indexation.png">
+    <img src="https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/tree/master/images/example1-indexation.png">
 </div>
 
 ### Example with ImageAI Detection Object
 
 <div align="center">
   <a href="https://github.com/OlafenwaMoses/ImageAI">
-    <img src="https://gitlab.com/maximelordey/jhipster-module-imageblob_indexation/raw/master/images/example2-indexation.png">
+    <img src="https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/tree/master/images/example2-indexation.png">
   </a>
 </div>
 
@@ -146,7 +146,7 @@ yo jhipster-imageblobindexation
 
 # License
 
-Apache-2.0 © [Contribution UGA](https://gitlab.com/maximelordey/jhipster-module-imageblob_indexation/blob/master/LICENSE)
+Apache-2.0 © [Contribution UGA](https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/blob/master/LICENSE)
 
 [npm-image]: https://img.shields.io/npm/v/generator-jhipster-imageBlobIndexation.svg
 [npm-url]: https://npmjs.org/package/generator-jhipster-imageBlobIndexation
