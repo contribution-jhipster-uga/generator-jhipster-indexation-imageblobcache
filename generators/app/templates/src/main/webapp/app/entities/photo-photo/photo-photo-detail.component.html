@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="photo">
+            <h2><span>Photo</span> {{photo.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Title</span></dt>
+                <dd>
+                    <span>{{photo.title}}</span>
+                </dd>
+                <dt><span>Note</span></dt>
+                <dd>
+                    <span>{{photo.note}}</span>
+                </dd>
+                <dt><span>Image</span></dt>
+                <dd>
+                    <div *ngIf="photo.image">
+                        <a (click)="openFile(photo.imageContentType, photo.image)">
+                            <img [src]="photo.image" style="max-width: 100%;" alt="photo image"/>
+                        </a>
+                        {{photo.imageContentType}}, {{byteSize(photo.image)}}
+                    </div>
+                </dd>
+                <dt><span>Image Sha 1</span></dt>
+                <dd>
+                    <span>{{photo.imageSha1}}</span>
+                </dd>
+                <dt><span>Thumbnailx 1</span></dt>
+                <dd>
+                    <div *ngIf="photo.thumbnailx1">
+                        <a (click)="openFile(photo.thumbnailx1ContentType, photo.thumbnailx1)">
+                            <img [src]="photo.thumbnailx1" style="max-width: 100%;" alt="photo image"/>
+                        </a>
+                        {{photo.thumbnailx1ContentType}}, {{byteSize(photo.thumbnailx1)}}
+                    </div>
+                </dd>
+                <dt><span>Thumbnailx 1 Sha 1</span></dt>
+                <dd>
+                    <span>{{photo.thumbnailx1Sha1}}</span>
+                </dd>
+                <dt><span>Thumbnailx 2</span></dt>
+                <dd>
+                    <div *ngIf="photo.thumbnailx2">
+                        <a (click)="openFile(photo.thumbnailx2ContentType, photo.thumbnailx2)">
+                            <img [src]="photo.thumbnailx2" style="max-width: 100%;" alt="photo image"/>
+                        </a>
+                        {{photo.thumbnailx2ContentType}}, {{byteSize(photo.thumbnailx2)}}
+                    </div>
+                </dd>
+                <dt><span>Thumbnailx 2 Sha 1</span></dt>
+                <dd>
+                    <span>{{photo.thumbnailx2Sha1}}</span>
+                </dd>
+
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/photo', photo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

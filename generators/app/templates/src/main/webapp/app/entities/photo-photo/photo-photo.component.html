@@ -1,0 +1,125 @@
+<div>
+    <h2 id="page-heading">
+        <span>Photos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-photo-photo" [routerLink]="['/photo/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span>
+            Create a new Photo
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="row" id="ElasticsearchStart">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"
+                           name="currentSearch">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="alert alert-warning" *ngIf="photos?.length === 0" id="ElasticsearchEnd">
+        <span>No photos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="photos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="title"><span>Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="note"><span>Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="image"><span>Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="imageSha1"><span>Image Sha 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="thumbnailx1"><span>Thumbnailx 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="thumbnailx1Sha1"><span>Thumbnailx 1 Sha 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="thumbnailx2"><span>Thumbnailx 2</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="thumbnailx2Sha1"><span>Thumbnailx 2 Sha 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!--th scope="col"  jhiSortBy="exif"><span jhiTranslate="lazyblobApp.photo.exif">Exif</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="extractedText"><span jhiTranslate="lazyblobApp.photo.extractedText">Extracted Text</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="detectedObjects"><span jhiTranslate="lazyblobApp.photo.detectedObjects">Detected Objects</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="createdAt"><span jhiTranslate="lazyblobApp.photo.createdAt">Created At</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="updatedAt"><span jhiTranslate="lazyblobApp.photo.updatedAt">Updated At</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th-- scope="col"  jhiSortBy="belongToTitle"><span jhiTranslate="lazyblobApp.photo.belongTo">Belong To</span> <fa-icon [icon]="'sort'"></fa-icon></th-->
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let photo of photos ;trackBy: trackId">
+                <td><a [routerLink]="['/photo', photo.id, 'view' ]">{{photo.id}}</a></td>
+                <td>{{photo.title}}</td>
+                <td>{{photo.note}}</td>
+                <td>
+                    <a (click)="openFile(photo.imageContentType, photo.image)">
+                        <img [src]="photo.image"
+                             style="max-height: 30px;" alt="photo image"/>
+                    </a>
+                    <span *ngIf="photo.image">{{photo.imageContentType}}, {{byteSize(photo.image)}}</span>
+                </td>
+                <td>{{photo.imageSha1}}</td>
+                <td>
+                    <a (click)="openFile(photo.thumbnailx1ContentType, photo.thumbnailx1)">
+                        <img [src]="photo.thumbnailx1" style="max-height: 30px;" alt="photo image"/>
+                    </a>
+                    <span *ngIf="photo.thumbnailx1">{{photo.thumbnailx1ContentType}}, {{byteSize(photo.thumbnailx1)}}</span>
+                </td>
+                <td>{{photo.thumbnailx1Sha1}}</td>
+                <td>
+                    <a (click)="openFile(photo.thumbnailx2ContentType, photo.thumbnailx2)">
+                        <img [src]="photo.thumbnailx2" style="max-height: 30px;" alt="photo image"/>
+                    </a>
+                    <span *ngIf="photo.thumbnailx2">{{photo.thumbnailx2ContentType}}, {{byteSize(photo.thumbnailx2)}}</span>
+                </td>
+                <td>{{photo.thumbnailx2Sha1}}</td>
+                <!--td>{{photo.exif}}</td>
+                <td>{{photo.extractedText}}</td>
+                <td>{{photo.detectedObjects}}</td>
+                <td>{{photo.createdAt | date:'medium'}}</td>
+                <td>{{photo.updatedAt | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="photo.belongToId">
+                        <a [routerLink]="['/album-photo', photo.belongToId , 'view' ]" >{{photo.belongToTitle}}</a>
+                    </div>
+                </td-->
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/photo', photo.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/photo', photo.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(photo)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="photos?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

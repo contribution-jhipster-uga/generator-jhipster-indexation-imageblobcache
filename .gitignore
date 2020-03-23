@@ -1,0 +1,13 @@
+node_modules
+coverage
+.idea
+*.iml
+*.ipr
+*.iws
+atlassian-ide-plugin.xml
+/.project
+test/temp/
+*debug.log*
+.vscode
+README.md
+generators/app/templates/src/main/java/package/indexation/tessdata/*

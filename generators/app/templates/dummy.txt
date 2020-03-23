@@ -1,0 +1,2 @@
+hello imageBlobIndexation!
+It's dummy.txt

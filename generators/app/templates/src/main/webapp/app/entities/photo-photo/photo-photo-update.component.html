@@ -1,0 +1,223 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-photo-photo-heading">Create or edit a Photo</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                           formControlName="title"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" >Note</label>
+                    <input type="text" class="form-control" name="note" id="field_note"
+                           formControlName="note"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" >Image</label>
+                    <div>
+                        <img [src]="editForm.get('image').value"
+                             style="max-height: 30px;" alt="photo image"/>
+
+                        <div *ngIf="editForm.get('image').value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{editForm.get('imageContentType').value}}, {{byteSize(editForm.get('image').value)}}</span>
+                            <button type="button" (click)="clearInputImage('image', 'imageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_image" (change)="setFileData($event, 'image', true)" accept="image/*" />
+
+                    </div>
+                    <input type="hidden" class="form-control" name="image" id="field_image"
+                           formControlName="image"/>
+                    <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                           formControlName="imageContentType" />
+                    <div *ngIf="editForm.get('image').invalid && (editForm.get('image').dirty || editForm.get('image').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('image').errors.required" >
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('image').errors.maxbytes">
+                            This field cannot be more than 5000000.
+                        </small>
+                    </div>
+                </div>
+
+                <!--
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lazyblobApp.photo.imageSha1" for="field_imageSha1">Image Sha 1</label>
+                    <input type="text" class="form-control" name="imageSha1" id="field_imageSha1"
+                           formControlName="imageSha1"/>
+                    <div *ngIf="editForm.get('imageSha1').invalid && (editForm.get('imageSha1').dirty || editForm.get('imageSha1').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('imageSha1').errors.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 40 }">
+                        This field is required to be at least 40 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('imageSha1').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 40 }">
+                        This field cannot be longer than 40 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('imageSha1').errors.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Image Sha 1' }">
+                            This field should follow pattern for "Image Sha 1".
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lazyblobApp.photo.thumbnailx1" for="field_thumbnailx1" [ngbTooltip]="'lazyblobApp.photo.help.thumbnailx1' | translate">Thumbnailx 1</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('thumbnailx1ContentType').value + ';base64,' + editForm.get('thumbnailx1').value" style="max-height: 100px;" *ngIf="editForm.get('thumbnailx1').value" alt="photo image"/>
+                        <div *ngIf="editForm.get('thumbnailx1').value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{editForm.get('thumbnailx1ContentType').value}}, {{byteSize(editForm.get('thumbnailx1').value)}}</span>
+                            <button type="button" (click)="clearInputImage('thumbnailx1', 'thumbnailx1ContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_thumbnailx1" (change)="setFileData($event, 'thumbnailx1', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="thumbnailx1" id="field_thumbnailx1"
+                           formControlName="thumbnailx1"/>
+                    <input type="hidden" class="form-control" name="thumbnailx1ContentType" id="field_thumbnailx1ContentType"
+                           formControlName="thumbnailx1ContentType" />
+                    <div *ngIf="editForm.get('thumbnailx1').invalid && (editForm.get('thumbnailx1').dirty || editForm.get('thumbnailx1').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('thumbnailx1').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('thumbnailx1').errors.maxbytes" jhiTranslate="entity.validation.maxbytes" [translateValues]="{ max: 5000000 }">
+                            This field cannot be more than 5000000.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lazyblobApp.photo.thumbnailx1Sha1" for="field_thumbnailx1Sha1">Thumbnailx 1 Sha 1</label>
+                    <input type="text" class="form-control" name="thumbnailx1Sha1" id="field_thumbnailx1Sha1"
+                           formControlName="thumbnailx1Sha1"/>
+                    <div *ngIf="editForm.get('thumbnailx1Sha1').invalid && (editForm.get('thumbnailx1Sha1').dirty || editForm.get('thumbnailx1Sha1').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('thumbnailx1Sha1').errors.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 40 }">
+                        This field is required to be at least 40 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('thumbnailx1Sha1').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 40 }">
+                        This field cannot be longer than 40 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('thumbnailx1Sha1').errors.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Thumbnailx 1 Sha 1' }">
+                            This field should follow pattern for "Thumbnailx 1 Sha 1".
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lazyblobApp.photo.thumbnailx2" for="field_thumbnailx2" [ngbTooltip]="'lazyblobApp.photo.help.thumbnailx2' | translate">Thumbnailx 2</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('thumbnailx2ContentType').value + ';base64,' + editForm.get('thumbnailx2').value" style="max-height: 100px;" *ngIf="editForm.get('thumbnailx2').value" alt="photo image"/>
+                        <div *ngIf="editForm.get('thumbnailx2').value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{editForm.get('thumbnailx2ContentType').value}}, {{byteSize(editForm.get('thumbnailx2').value)}}</span>
+                            <button type="button" (click)="clearInputImage('thumbnailx2', 'thumbnailx2ContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_thumbnailx2" (change)="setFileData($event, 'thumbnailx2', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="thumbnailx2" id="field_thumbnailx2"
+                           formControlName="thumbnailx2"/>
+                    <input type="hidden" class="form-control" name="thumbnailx2ContentType" id="field_thumbnailx2ContentType"
+                           formControlName="thumbnailx2ContentType" />
+                    <div *ngIf="editForm.get('thumbnailx2').invalid && (editForm.get('thumbnailx2').dirty || editForm.get('thumbnailx2').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('thumbnailx2').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('thumbnailx2').errors.maxbytes" jhiTranslate="entity.validation.maxbytes" [translateValues]="{ max: 5000000 }">
+                            This field cannot be more than 5000000.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lazyblobApp.photo.thumbnailx2Sha1" for="field_thumbnailx2Sha1">Thumbnailx 2 Sha 1</label>
+                    <input type="text" class="form-control" name="thumbnailx2Sha1" id="field_thumbnailx2Sha1"
+                           formControlName="thumbnailx2Sha1"/>
+                    <div *ngIf="editForm.get('thumbnailx2Sha1').invalid && (editForm.get('thumbnailx2Sha1').dirty || editForm.get('thumbnailx2Sha1').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('thumbnailx2Sha1').errors.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 40 }">
+                        This field is required to be at least 40 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('thumbnailx2Sha1').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 40 }">
+                        This field cannot be longer than 40 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('thumbnailx2Sha1').errors.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Thumbnailx 2 Sha 1' }">
+                            This field should follow pattern for "Thumbnailx 2 Sha 1".
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lazyblobApp.photo.exif" for="field_exif" [ngbTooltip]="'lazyblobApp.photo.help.exif' | translate">Exif</label>
+                    <textarea class="form-control" name="exif" id="field_exif"
+                              formControlName="exif"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lazyblobApp.photo.extractedText" for="field_extractedText" [ngbTooltip]="'lazyblobApp.photo.help.extractedText' | translate">Extracted Text</label>
+                    <textarea class="form-control" name="extractedText" id="field_extractedText"
+                              formControlName="extractedText"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lazyblobApp.photo.detectedObjects" for="field_detectedObjects" [ngbTooltip]="'lazyblobApp.photo.help.detectedObjects' | translate">Detected Objects</label>
+                    <textarea class="form-control" name="detectedObjects" id="field_detectedObjects"
+                              formControlName="detectedObjects"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lazyblobApp.photo.createdAt" for="field_createdAt" [ngbTooltip]="'lazyblobApp.photo.help.createdAt' | translate">Created At</label>
+                    <div class="d-flex">
+                        <input id="field_createdAt" type="datetime-local" class="form-control" name="createdAt" formControlName="createdAt" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('createdAt').invalid && (editForm.get('createdAt').dirty || editForm.get('createdAt').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('createdAt').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('createdAt').errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lazyblobApp.photo.updatedAt" for="field_updatedAt" [ngbTooltip]="'lazyblobApp.photo.help.updatedAt' | translate">Updated At</label>
+                    <div class="d-flex">
+                        <input id="field_updatedAt" type="datetime-local" class="form-control" name="updatedAt" formControlName="updatedAt" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="lazyblobApp.photo.belongTo" for="field_belongTo">Belong To</label>
+                    <select class="form-control" id="field_belongTo" name="belongTo" formControlName="belongToId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="albumOption.id" *ngFor="let albumOption of albums; trackBy: trackAlbumById">{{albumOption.title}}</option>
+                    </select>
+                </div>
+                -->
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

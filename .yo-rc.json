@@ -1,0 +1,10 @@
+{
+  "generator-jhipster-module": {
+    "promptValues": {
+      "githubName": "maximelordey",
+      "authorName": "Firstname Lastname",
+      "authorEmail": "",
+      "authorUrl": ""
+    }
+  }
+}
