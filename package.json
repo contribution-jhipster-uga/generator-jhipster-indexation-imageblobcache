@@ -10,7 +10,7 @@
     "cache",
     "elasticsearch"
   ],
-  "homepage": "https://gitlab.com/maximelordey/jhipster-module-imageblob_indexation",
+  "homepage": "https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache",
   "author": {
     "name": "Contribution JHipster UGA, Maxime LORDEY, Thibaut ARNOUX, Tom SOLVERY (https://github.com/contribution-jhipster-uga/)",
     "email": "contribution.jhipster.uga@gmail.com",
@@ -22,7 +22,7 @@
   "main": "generators/app/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maximelordey/generator-jhipster-imageBlobIndexation.git"
+    "url": "git+https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache.git"
   },
   "dependencies": {
     "chalk": "3.0.0",
@@ -69,6 +69,6 @@
     ]
   },
   "bugs": {
-    "url": "https://github.com/maximelordey/generator-jhipster-imageBlobIndexation/issues"
+    "url": "https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/issues"
   }
 }
