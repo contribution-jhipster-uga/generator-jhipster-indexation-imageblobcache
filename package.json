@@ -1,6 +1,6 @@
 {
   "name": "generator-jhipster-imageblobindexation",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Integrate a Photo module with cache optimization and full text indexation with ImageAI, OCR and metadata.",
   "keywords": [
     "yeoman-generator",

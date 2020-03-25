@@ -58,13 +58,13 @@ sudo apt-get install tesseract-ocr
 To install this module:
 
 ```bash
-npm install -g generator-jhipster-imageBlobIndexation
+npm install -g generator-jhipster-imageblobindexation
 ```
 
 To update this module:
 
 ```bash
-npm update -g generator-jhipster-imageBlobIndexation
+npm update -g generator-jhipster-imageblobindexation
 ```
 
 ## With Yarn
@@ -72,13 +72,13 @@ npm update -g generator-jhipster-imageBlobIndexation
 To install this module:
 
 ```bash
-yarn global add generator-jhipster-imageBlobIndexation
+yarn global add generator-jhipster-imageblobindexation
 ```
 
 To update this module:
 
 ```bash
-yarn global upgrade generator-jhipster-imageBlobIndexation
+yarn global upgrade generator-jhipster-imageblobindexation
 ```
 
 # Usage
