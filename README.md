@@ -150,8 +150,8 @@ Apache-2.0 © [Contribution UGA](https://github.com/contribution-jhipster-uga/ge
 
 [npm-image]: https://img.shields.io/npm/v/generator-jhipster-imageBlobIndexation.svg
 [npm-url]: https://npmjs.org/package/generator-jhipster-imageBlobIndexation
-[github-actions-image]: https://github.com/maximelordey/generator-jhipster-imageBlobIndexation/workflows/Build/badge.svg
-[github-actions-url]: https://github.com/maximelordey/generator-jhipster-imageBlobIndexation/actions
+[github-actions-image]: https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/workflows/Build/badge.svg
+[github-actions-url]: https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/actions
 [daviddm-image]: https://david-dm.org/maximelordey/generator-jhipster-imageBlobIndexation.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/maximelordey/generator-jhipster-imageBlobIndexation
 
