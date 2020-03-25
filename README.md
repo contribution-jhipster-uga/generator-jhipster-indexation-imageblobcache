@@ -148,12 +148,12 @@ yo jhipster-imageblobindexation
 
 Apache-2.0 © [Contribution UGA](https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/blob/master/LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/generator-jhipster-imageBlobIndexation.svg
-[npm-url]: https://npmjs.org/package/generator-jhipster-imageBlobIndexation
+[npm-image]: https://img.shields.io/npm/v/generator-jhipster-imageblobindexation.svg
+[npm-url]: https://npmjs.org/package/generator-jhipster-imageblobindexation
 [github-actions-image]: https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/workflows/Build/badge.svg
 [github-actions-url]: https://github.com/contribution-jhipster-uga/generator-jhipster-indexation-imageblobcache/actions
-[daviddm-image]: https://david-dm.org/maximelordey/generator-jhipster-imageBlobIndexation.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/maximelordey/generator-jhipster-imageBlobIndexation
+[daviddm-image]: https://david-dm.org/maximelordey/generator-jhipster-imageblobindexation.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/maximelordey/generator-jhipster-imageblobindexation
 
 ### Versionning
 
